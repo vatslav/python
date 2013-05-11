@@ -32,12 +32,59 @@ def RabinMiller(n, k):
                 return True
 
     return False
-print(RabinMiller(29,100))
-
+#print(RabinMiller(9,1000))
+'''
 for x in range(33):
     simple = RabinMiller(x, 1)
     hard = RabinMiller(x, 250)
     print(x, simple, hard, ["!!!",""][simple==hard])
 
+'''
 
+def binpow(a, x, mod):
+    res = 1
+    a %= mod
+    #print(type(x))
+    while (x):
+        if (int(x) & 1):
+            res *= a
+            res %= mod
+        a *= a
+        a %= mod
+        x /= 2
+    return res
+
+
+
+bit = 20
+def is_prime(num) :
+    if (num == 2):
+        return True
+    if ((num < 2) or (num % 2 == 0)):
+        return False
+    b = 2
+    p = 0
+    q = num-1
+    cnt = bit
+    while (q % 2 == 0):
+        q /= 2
+        p += 1
+    while (cnt):
+        x = random.randint(1, num-1)
+        x = binpow(x,q,num)
+        if (x == 1 or x == num-1):
+            return True
+        for i in range(0,p):
+            x = (x * x) % num
+            if (x == num-1):
+                break
+            else:
+                return False
+            p -= 1
+        cnt -= 1
+    return False
+for x in range(33):
+    print(x, is_prime(x))
+
+print(151091, is_prime(151093))   
 
