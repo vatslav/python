@@ -1,7 +1,12 @@
 #class NoneRelase(Exception):
-
-q = '123456'
-print([lambda x:  for x in range(len(q))])
+ptr = 0
+x=10
+while (x): #пока x!=0
+	ptr+=1
+	x /= 2
+	print(x)
+print(ptr,x)
+print('zero=',2**(-1078))
 
 
 

@@ -33,7 +33,7 @@ def binpow(a, x, mod):
     res = 1
     a %= mod
     while (x):
-        if (x & 1):
+        if (int(x) & 1):
             res *= a
             res %= mod
         a *= a
@@ -46,18 +46,20 @@ def is_prime(num) :
         return True
     if ((num < 2) or (num % 2 == 0)):
         return False
-    b = 2
     p = 0
     q = num-1
-    cnt = bit
+    rcount = bit # количество раундов
+    #ищем степень в которую можно возвести
     while (q % 2 == 0):
         q /= 2
         p += 1
-    while (cnt):
-        x = random.randint(1, num-1)
-        x = binpow(x,q,num)
+    #цикл A
+    while (rcount):
+        x = random.randint(2, num-1) # случайное число из диапазона
+        x = binpow(x,q,num) #то самое стремление к х
         if (x == 1 or x == num-1):
             return True
+        #цикл Б
         for i in range(0,p):
             x = (x * x) % num
             if (x == num-1):
@@ -65,7 +67,7 @@ def is_prime(num) :
             else:
                 return False
             p -= 1
-        cnt -= 1
+        rcount -= 1
     return False
 
 def generate(p1,p2):
@@ -101,10 +103,10 @@ d = euclid_ext(phi_n, e)
 d = ((d % phi_n) + phi_n) % phi_n
 ####################
 
-print "RSA public key:\n{e, n} = {"+str(e)+", "+str(n)+"}\n"
-print "RSA private key:\n{d, n} = {"+str(d)+", "+str(n)+"}\n"
-print "Encoded message: "+str(enc(msg))
-print "Decoded message: "+str(dec(enc(msg)))
+print ("RSA public key:\n{e, n} = {"+str(e)+", "+str(n)+"}\n")
+print ("RSA private key:\n{d, n} = {"+str(d)+", "+str(n)+"}\n")
+print ("Encoded message: "+str(enc(msg)))
+print ("Decoded message: "+str(dec(enc(msg))))
 
 
 
