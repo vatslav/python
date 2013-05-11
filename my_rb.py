@@ -3,15 +3,20 @@
 автор: Вацлав
 реализация алоритма шифровния RSA
 '''
-
+import random
 
 class rsa:
-	_intTextList = [] # crypt word in number
+	
 	_word = ''
+	s = 0
+	t = 0
+	m = 0 
 	def __init__(self,word):
 		self.word = word
 	def __init__(self):
-		pass
+		self.m = 131
+		self.s = self._getS()
+		self.t = self._getT()
 
 	def _textToint(self,word):
 		'''
@@ -44,78 +49,60 @@ class rsa:
 
 		return result
 
-	def _getS(self,number):
+	def _getS(self,number=m):
 		b = 0
 		number -= 1
 		while number % 2 == 0:
 			number /= 2
 			b += 1
 		return b
-	def _getT(self,m,t):
-		return m/(2**t)
+	def _getT(self,m=m,s=s):
+		return m/(2**s)
 	def bVeify(self,m,b):
 		m=m-1
 		if (2**b)*(m/(2**b))==m:
 			return True
 		return False
 	def encode(self, inword):
-		intTextList = _textToint(self._word)
-		raise NameError("encode was")
-		return None
+		self.intcode = self._textToint(inword)
+		#raise NameError("encode was note define")
+		return "encode was note define"
 	def decode(self, inCode):
-		raise NameError("decode was none define")
-		return None
+		#raise NameError()
+		return "decode was none define"
+	def rabin_miller(self, m=m, r=10):
+		#A
+		flag = False
+		for i in range(r):
+			a = random.randint(2, m-2)
+			x = pow(a,self.t) % self.m
+			
+			if x==1 or x==self.m - 1:
+				continue
+			#B
 
-class rsaTest:
-	def __init__(self):
-		self.rsa_main = rsa()
-		word = "hello world"
-	def generalTest(self):
-		if self.rsa.decode(self.rsa-main.encode(word)) == word:
-			return True
-		return False
-	def textToIntVerify(self):
-		pass
+			for j in range(self.s):
+				x = (x*x) % self.m
+				if x==1:
+					return False # comlex
+				if x==self.m-1:
+					flag = True 
+					break
+			if flag==True:
+				flag=False
+				continue
+			return False #complex
+		return True #Simple
 
-myrsa = rsa()
-print(myrsa._textToint("hello world"))
-#b=myrsa._getB(65)
-#print(b, ))
+
+
+def main():
+	myrsa = rsa()
+	print(myrsa._textToint("hello world"))
+	print(myrsa.rabin_miller(21, 3))
+
 
 if __name__ == "__main__":
 	import doctest
 	doctest.testmod()
-
-
-def run_once(f):
-    """
-    Мемоизация. Не зависит от аргументов.
-    """
-    def _f(*args, **kwargs):
-        if not hasattr(_f, "_retval"):
-            _f._retval = f(*args, **kwargs)
-        return _f._retval
-    return _f
-
-'''
-def getB2(number):
-	b = 0
-	number -= 1
-	while number / 2 > 2:
-		number /= 2
-		b += 1
-	return b	
-
-p = 23
-pLess = p - 1
-
-b = getB(p)
-t = pLess/2
-
-bx = 2**b
-print(b, (2**b)*t + 1, p/bx, b)
-
-b = getB2(p)
-bx = 2**b
-print(b, (2**b)*(p/bx), p/bx, b)
-'''
+	main()

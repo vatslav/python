@@ -22,12 +22,29 @@ class test_my_rb(unittest.TestCase):
 		t = self.tobject._getS(65)
 		self.assertEqual(t, 6)
 		#динамический тест
-		for W in range(10):
+		for I in range(10):
 			x = 2
 			while (x-1) % 2 != 0:
 				x = random.randint(3, 99999999)
 			t = self.tobject.bVeify(x,self.tobject._getS(x))
 			self.assertEqual(t, True)
+		
+		word = 'hello world'
+		t = (self.tobject.decode(self.tobject.encode(word)) == word)
+		#self.assertEqual(t,True)
+	
+	def testEncode(self):
+		t = self.tobject.encode('hello word')
+		#self.assertEqual(t, None)
+	def testDecode(self):
+		t = self.tobject.decode('123125436757687')
+		#self.assertEqual(t, None)
+
+	
+
+
+
+
 		
 if __name__ == '__main__':
 	unittest.main()

@@ -2,7 +2,7 @@ import random
 
 def RabinMiller(n, k):
 
-    # obviously not prime
+    # еслинам дали число <2 или четное число
     if n < 2 or n % 2 == 0:
         return False
 
@@ -13,12 +13,12 @@ def RabinMiller(n, k):
     s = 0
     r = n - 1
 
-    # factor n - 1 as 2^(r)*s
+    # педставление n - 1 как 2^(r) * s
     while r % 2 == 0:
         s = s + 1
-        r = r // 2  # floor
+        r = r // 2  # целочисленное деление
 
-    # k = accuracy
+    # k - точность
     for i in range(k):
         a = random.randrange(1, n)
 
@@ -32,5 +32,12 @@ def RabinMiller(n, k):
                 return True
 
     return False
+print(RabinMiller(29,100))
 
-print(RabinMiller(21, 500))
+for x in range(33):
+    simple = RabinMiller(x, 1)
+    hard = RabinMiller(x, 250)
+    print(x, simple, hard, ["!!!",""][simple==hard])
+
+
+
