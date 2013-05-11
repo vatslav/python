@@ -46,7 +46,7 @@ def binpow(a, x, mod):
     a %= mod
     #print(type(x))
     while (x):
-        if (int(x) & 1):
+        if (int(x) & 1): #побитовое или при сравнение с 1 дает true если число нечетно
             res *= a
             res %= mod
         a *= a
@@ -86,5 +86,5 @@ def is_prime(num) :
 for x in range(33):
     print(x, is_prime(x))
 
-print(151091, is_prime(151093))   
+print(151091, is_prime(151091))   
 
