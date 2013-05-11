@@ -30,6 +30,7 @@ class rsa:
 		'''
 		метод преобразования кода чисел в символы
 		'''
+		intcode = str(intcode)
 		ptr=0
 		buf = ''
 		result = ''
@@ -39,16 +40,24 @@ class rsa:
 			if ptr==3:
 				ptr=0
 				result+=chr(int(buf))
+				buf=''
 
 		return result
 
-	def _getB(number):
+	def _getS(self,number):
 		b = 0
 		number -= 1
 		while number % 2 == 0:
 			number /= 2
 			b += 1
 		return b
+	def _getT(self,m,t):
+		return m/(2**t)
+	def bVeify(self,m,b):
+		m=m-1
+		if (2**b)*(m/(2**b))==m:
+			return True
+		return False
 	def encode(self, inword):
 		intTextList = _textToint(self._word)
 		raise NameError("encode was")
@@ -70,6 +79,8 @@ class rsaTest:
 
 myrsa = rsa()
 print(myrsa._textToint("hello world"))
+#b=myrsa._getB(65)
+#print(b, ))
 
 if __name__ == "__main__":
 	import doctest

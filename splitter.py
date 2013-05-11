@@ -1,4 +1,6 @@
 
+print(6%2)
+
 #unit2 функция разделитель для юниттестов
 def split(line, types=None, delimeter=None):
 	fields = line.split(delimeter)
