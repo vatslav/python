@@ -10,13 +10,11 @@ class rsa:
 	_word = ''
 	s = 0
 	t = 0
-	m = 0 
+	m = 1024 
 	def __init__(self,word):
 		self.word = word
 	def __init__(self):
-		self.m = 131
-		self.s = self._getS()
-		self.t = self._getT()
+		pass
 
 	def _textToint(self,word):
 		'''
@@ -49,20 +47,6 @@ class rsa:
 
 		return result
 
-	def _getS(self,number=m):
-		b = 0
-		number -= 1
-		while number % 2 == 0:
-			number /= 2
-			b += 1
-		return b
-	def _getT(self,m=m,s=s):
-		return m/(2**s)
-	def bVeify(self,m,b):
-		m=m-1
-		if (2**b)*(m/(2**b))==m:
-			return True
-		return False
 	def encode(self, inword):
 		self.intcode = self._textToint(inword)
 		#raise NameError("encode was note define")
@@ -70,29 +54,61 @@ class rsa:
 	def decode(self, inCode):
 		#raise NameError()
 		return "decode was none define"
+	def binpow(self,a, x, mod):
+	    res = 1
+	    a %= mod
+	    while (x):
+	        if (int(x) & 1):
+	            res *= a
+	            res %= mod
+	        a *= a
+	        a %= mod
+	        x /= 2
+	    return res
 	def rabin_miller(self, m=m, r=10):
-		#A
-		flag = False
-		for i in range(r):
-			a = random.randint(2, m-2)
-			x = pow(a,self.t) % self.m
-			
-			if x==1 or x==self.m - 1:
-				continue
-			#B
+	    if (m == 2):
+	        return True
+	    if ((m < 2) or (m % 2 == 0)):
+	        return False
+	    p = 0
+	    q = m-1
+	    
+	    #ищем степень в которую можно возвести
+	    while (q % 2 == 0):
+	        q /= 2
+	        p += 1
+	    #цикл A
+	    while (r):
+	        x = random.randint(2, m-1) # случайное число из диапазона
+	        x = self.binpow(x,q,m) #то самое стремление к х
+	        if (x == 1 or x == m-1):
+	            return True
+	        #цикл Б
+	        for i in range(0,p):
+	            x = (x * x) % m
+	            if (x == m-1):
+	                break
+	            else:
+	                return False
+	            p -= 1
+	        r -= 1
+	    return False
+	def primeGenerator(self,bitSize):
+		'''генерирует простое случайное число заданной длины
 
-			for j in range(self.s):
-				x = (x*x) % self.m
-				if x==1:
-					return False # comlex
-				if x==self.m-1:
-					flag = True 
-					break
-			if flag==True:
-				flag=False
-				continue
-			return False #complex
-		return True #Simple
+		'''
+		start = 2**(bitSize-1)
+		end   = 2**bitSize - 1
+
+		while (1):
+		    prime = random.randint(start, end)
+		    if self.rabin_miller(prime):
+		    	return prime
+
+	def keyGenerator(self):
+		pass
+    	
+
 
 
 
