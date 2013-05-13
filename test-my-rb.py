@@ -38,10 +38,10 @@ class test_rsa(unittest.TestCase):
 	    else:
 	        return True
 	def testPrimeGenerator(self):
-		t = self.tobject.primeGenerator(5)
+		t = self.tobject._primeGenerator(5)
 		self.assertEqual(self.smallPrimeVerificator(t),True)
 
-		t = self.tobject.primeGenerator(10)
+		t = self.tobject._primeGenerator(40)
 		self.assertEqual(self.smallPrimeVerificator(t),True)
 
 
@@ -52,8 +52,7 @@ class test_rsa(unittest.TestCase):
 
 		
 if __name__ == '__main__':
-	bitSize = 5
-	print(2**(bitSize-1), 2**bitSize - 1)
+
 
 
 
