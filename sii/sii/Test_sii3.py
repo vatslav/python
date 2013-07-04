@@ -8,7 +8,7 @@ class testClasters:
 		'''init test'''
 		pass
 	def tearDown(self):
-		'''complite test'''
+		'''complite test1'''
 		pass
 
 
