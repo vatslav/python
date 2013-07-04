@@ -7,7 +7,7 @@
 #
 # Created:     03.04.2013 # Copyright:   (c) student 2013
 # Licence:     <your licence>
-#-------------------------------------------------------------------------------
+#------------#-------------------------------------------------------------------
 #!/usr/bin/env python
 from tkinter import *
 import random
@@ -17,7 +17,7 @@ from copy import deepcopy
 
 
 class mdNeighbor:
-    debug
+    debug = 0
     numberpoints = 5
     intervalA = 0
     intervalB=500
@@ -26,7 +26,8 @@ class mdNeighbor:
 
     def d(self, a,b):
       '''
-      нахождение растояния между 2 точками'''
+      нахождение растояния между 2 кластерами
+      если а==б => вернуть 0'''
       return sqrt( (a[0]-b[0])**2 + (a[1]-b[1])**2 )
 
     def classIter(self):
