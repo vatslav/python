@@ -2,7 +2,7 @@ import random
 import nbneibors
 import unittest
 
-class testClasters:
+class testClasters(unittest.TestCase):
 	'''tests for SII'''
 	def setUp(self):
 		self.test = nbneibors.mdNeighbor()
@@ -13,7 +13,7 @@ class testClasters:
 		a = (1,1)
 		b = (1,2)
 		t = self.test.d(a,b)
-		self.assertEqual(t,2)
+		self.assertEqual(t,5)
 
 
 

@@ -39,7 +39,7 @@ class mdNeighbor:
         self.points = [[(random.randint(self.intervalA, self.intervalB),random.randint(self.intervalA, self.intervalB)) 
         for j in range(self.numberpoints)] for i in range(self.numberpoints)]
         #создаем классы
-        self.deepcopy()
+        #self.deepcopy()
         for line in self.points:
           self.classes.append ([])
         self.classes
